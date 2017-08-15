@@ -1,0 +1,1 @@
+Research related to the theory of Morality As Cooperation. If you use any of the syntax in this repository, please cite the relevant paper or this repository.
