@@ -1,0 +1,45 @@
+TITLE: Your title goes here
+DATA: FILE = "finalmacitems.dat";
+VARIABLE: 
+NAMES = MR1-MR21 MJ1-MJ21; 
+MISSING=.;
+
+
+USEVARIABLES ARE
+MJ1-MJ21
+;
+
+ANALYSIS:
+ESTIMATOR IS MLR;
+ITERATIONS = 1000;
+CONVERGENCE = 0.00005;
+!BOOTSTRAP = 1000;
+PROCESSORS=4;
+
+
+MODEL:
+kinshipj BY MJ1* MJ2 MJ3;
+groupj BY MJ4* MJ5 MJ6;
+recipj BY MJ7* MJ8 MJ9;
+hawkj BY MJ10* MJ11 MJ12;
+dovej BY MJ13* MJ14 MJ15;
+fairj BY MJ16* MJ17 MJ18;
+posessj BY MJ19* MJ20 MJ21;
+
+kinshipj@1;
+groupj@1;
+recipj@1;
+hawkj@1;
+dovej@1;
+fairj@1;
+posessj@1; 
+
+[kinshipj@0];
+[groupj@0];
+[recipj@0];
+[hawkj@0];
+[dovej@0];
+[fairj@0];
+[posessj@0];
+
+OUTPUT: tech4 samp standardized residual modindices;

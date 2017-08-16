@@ -1,0 +1,46 @@
+TITLE: Your title goes here
+DATA: FILE = "finalmacitems.dat";
+VARIABLE: 
+NAMES = MR1-MR21 MJ1-MJ21; 
+MISSING=.;
+
+
+USEVARIABLES ARE
+MR1-MR21 MJ1-MJ21
+;
+!USEOBSERVATIONS ARE (Sample EQ 2);
+
+!IDVARIABLE is ID;
+
+ANALYSIS:
+ESTIMATOR IS MLR;
+ITERATIONS = 1000;
+CONVERGENCE = 0.00005;
+!BOOTSTRAP = 1000;
+PROCESSORS=4;
+
+
+MODEL:
+kinship BY MR1* MR2 MR3 MJ1-MJ3;
+group BY MR4* MR5 MR6 MJ4-MJ6;
+reciproc BY MR7* MR8 MR9 MJ7-MJ9;
+hawk BY MR10* MR11 MR12 MJ10-MJ12;
+dove BY MR13* MR14 MR15 MJ13-MJ15;
+fair BY MR16* MR17 MR18 MJ16-MJ18;
+posess BY MR19* MR20 MR21 MJ19-MJ21;
+[kinship@0];
+[group@0];
+[reciproc@0];
+[hawk@0];
+[dove@0];
+[fair@0];
+[posess@0];
+
+kinship@1;
+group@1;
+reciproc@1;
+hawk@1;
+dove@1;
+fair@1;
+posess@1; 
+OUTPUT: tech4 samp standardized residual modindices;

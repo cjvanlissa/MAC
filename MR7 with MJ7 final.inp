@@ -1,0 +1,72 @@
+TITLE: Your title goes here
+DATA: FILE = "finalmacitems.dat";
+VARIABLE: 
+NAMES = MR1-MR21 MJ1-MJ21; 
+MISSING=.;
+
+
+USEVARIABLES ARE
+MR1-MR21 MJ1-MJ21
+;
+
+ANALYSIS:
+ESTIMATOR IS MLR;
+ITERATIONS = 1000;
+CONVERGENCE = 0.00005;
+!BOOTSTRAP = 1000;
+PROCESSORS=4;
+
+
+MODEL:
+kinshipr BY MR1* MR2 MR3;
+groupr BY MR4* MR5 MR6;
+recipr BY MR7* MR8 MR9;
+hawkr BY MR10* MR11 MR12;
+dover BY MR13* MR14 MR15;
+fairr BY MR16* MR17 MR18;
+posessr BY MR19* MR20 MR21;
+
+kinshipr@1;
+groupr@1;
+recipr@1;
+hawkr@1;
+dover@1;
+fairr@1;
+posessr@1;
+
+[kinshipr@0];
+[groupr@0];
+[recipr@0];
+[hawkr@0];
+[dover@0];
+[fairr@0];
+[posessr@0];
+
+kinshipj BY MJ1* MJ2 MJ3;
+groupj BY MJ4* MJ5 MJ6;
+recipj BY MJ7* MJ8 MJ9;
+hawkj BY MJ10* MJ11 MJ12;
+dovej BY MJ13* MJ14 MJ15;
+fairj BY MJ16* MJ17 MJ18;
+posessj BY MJ19* MJ20 MJ21;
+
+kinshipj@1;
+groupj@1;
+recipj@1;
+hawkj@1;
+dovej@1;
+fairj@1;
+posessj@1; 
+
+[kinshipj@0];
+[groupj@0];
+[recipj@0];
+[hawkj@0];
+[dovej@0];
+[fairj@0];
+[posessj@0];
+
+OUTPUT: tech4 samp standardized residual modindices;
+ Savedata:
+    file is scores.txt;
+    save = fscores;
